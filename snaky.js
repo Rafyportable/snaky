@@ -11,12 +11,14 @@ let snake = [
   {x: 170, y: 200},
   {x: 160, y: 200},
 ];
+let apple = [{
+  x: 50, y: 100
+}]
 let dx = 10;
 let dy = 10;
 let direction = "right";
 
 setInterval(main, 250);
-
 
 function drawSnakePart(snakePart) {  
   snakeboard_ctx.fillStyle = 'green';  
@@ -26,11 +28,10 @@ function drawSnakePart(snakePart) {
 }
 
 //Draws an apple and randomly puts the apple anywhere inside the canvas
-function drawApple(snakePart) {
+function drawApple() {
   snakeboard_ctx.fillStyle = 'red';  
   snakeboard_ctx.strokestyle = 'orange';
-  snakeboard_ctx.fillRect(Math.random() * snakeboard.width, Math.random() * snakeboard.height, 10, 10);  
-  snakeboard_ctx.strokeRect(Math.random() * snakeboard.width, Math.random() * snakeboard.height, 10, 10);
+  snakeboard_ctx.fillRect(apple[0].x, apple[0].y, 10, 10);
 }
 
 function drawSnake() 
@@ -44,7 +45,7 @@ function main() {
   moveSnake();
   console.log("main has run");
   drawApple();
-
+  foodEaten();
 }
 
 function clearCanvas() {
@@ -91,5 +92,15 @@ function moveSnake() {
   snake.unshift(head);
   snake.pop();
 
+  
+}
+
+function foodEaten() {
+  if (snake[0].x == apple[0].x && snake[0].y == apple[0].y) {
+
+      apple[0].x = Math.floor(Math.random() * snakeboard.width / 10) * 10;
+      apple[0].y = Math.floor(Math.random() * snakeboard.height / 10) * 10;
+      console.log(apple);
+  }
   
 }
