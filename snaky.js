@@ -4,6 +4,11 @@ const board_background = "black";
 const board_border = "black";
 document.addEventListener("keydown", getKeyboardInput)
 
+//TODO: Apple not to appear in the snake
+//TODO: Snake to stop moving after going through canvas
+//TODO: In progress 
+
+//position of snake
 let snake = [
   {x: 200, y: 200},
   {x: 190, y: 200},
@@ -11,14 +16,20 @@ let snake = [
   {x: 170, y: 200},
   {x: 160, y: 200},
 ];
+
+//position of apple
 let apple = [{
-  x: 50, y: 100
+  x: 250, y: 100
 }]
+
+//movement based on pixels
 let dx = 10;
 let dy = 10;
+
+//initiallize the direction
 let direction = "right";
 
-setInterval(main, 250);
+setInterval(main, 120);
 
 function drawSnakePart(snakePart) {  
   snakeboard_ctx.fillStyle = 'green';  
@@ -27,36 +38,41 @@ function drawSnakePart(snakePart) {
   snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
-//Draws an apple and randomly puts the apple anywhere inside the canvas
+//Draw an apple and randomly puts the apple anywhere inside the canvas
 function drawApple() {
   snakeboard_ctx.fillStyle = 'red';  
   snakeboard_ctx.strokestyle = 'orange';
   snakeboard_ctx.fillRect(apple[0].x, apple[0].y, 10, 10);
 }
 
-function drawSnake() 
-{  
+function drawSnake() {  
   snake.forEach(drawSnakePart);
-}
 
+}
 function main() {
+
   clearCanvas();
   drawSnake();
   moveSnake();
   console.log("main has run");
   drawApple();
   foodEaten();
+
 }
 
 function clearCanvas() {
+
   snakeboard_ctx.fillStyle = board_background;
   snakeboard_ctx.strokestyle = board_border;
   snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
   snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+
 }
 
 function getKeyboardInput(event) {
+
   switch(event.key) {
+
     case "ArrowLeft":
       direction = "left"
       break;
@@ -69,12 +85,17 @@ function getKeyboardInput(event) {
     case "ArrowUp":
       direction = "up"
       break;
+
   }
+
 }
 
 function moveSnake() {
-  let head = {};
+
+  let head = {x: snake[0].x, y: snake[0].y};
+
   switch(direction) {
+
     case "right":
       head = {x: snake[0].x + dx, y: snake[0].y};
       break;
@@ -87,19 +108,21 @@ function moveSnake() {
     case "up":
       head = {x: snake[0].x, y: snake[0].y - dy};
       break;
-  }
 
+    }
+  
   snake.unshift(head);
   snake.pop();
 
-  
 }
 
 function foodEaten() {
+
   if (snake[0].x == apple[0].x && snake[0].y == apple[0].y) {
 
       apple[0].x = Math.floor(Math.random() * snakeboard.width / 10) * 10;
       apple[0].y = Math.floor(Math.random() * snakeboard.height / 10) * 10;
+      snake.push({x: snake[snake.length - 1].x + dx, y: snake[snake.length - 1].y + dy});
       console.log(apple);
   }
   
