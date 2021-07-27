@@ -122,7 +122,7 @@ function foodEaten() {
 
       apple[0].x = Math.floor(Math.random() * snakeboard.width / 10) * 10;
       apple[0].y = Math.floor(Math.random() * snakeboard.height / 10) * 10;
-      snake.push({x: snake[snake.length - 1].x + dx, y: snake[snake.length - 1].y + dy});
+      snake.push({x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
       console.log(apple);
   }
   
