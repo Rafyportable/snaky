@@ -1,3 +1,22 @@
+class snaky {
+
+  constructor(bodySize, color, startingPoint = {x: 200, y: 200}) {
+
+    if(startingPoint.x % 10 !== 0 || startingPoint.y % 10 !== 0) {
+      throw 'Starting point needs to be divisible by 10';
+    }
+
+    this.bodySize = bodySize;
+    this.color = color;
+    this.startingPoint = startingPoint;
+
+  }
+
+
+
+
+}
+
 const snakeboard = document.getElementById("gameCanvas");
 const snakeboard_ctx = gameCanvas.getContext("2d");
 const board_background = "black";
@@ -5,8 +24,8 @@ const board_border = "black";
 document.addEventListener("keydown", getKeyboardInput)
 
 //TODO: Apple not to appear in the snake
-//TODO: Snake to stop moving after going through canvas
 //TODO: In progress 
+//add score to the game 
 
 //position of snake
 let snake = [
@@ -51,10 +70,13 @@ function drawSnake() {
 }
 function main() {
 
+
+  if (gameOver()) {
+    return;
+  }
   clearCanvas();
   drawSnake();
   moveSnake();
-  console.log("main has run");
   drawApple();
   foodEaten();
 
@@ -116,6 +138,24 @@ function moveSnake() {
 
 }
 
+//stops the game when collision occur
+function gameOver() {
+
+  for (let i = 4; i < snake.length; i++) {
+    const has_collided = snake[i].x === snake[0].x && snake[i].y === snake[0].y
+    if (has_collided) {
+      return true
+    }
+  }
+  
+  if (snake[0].x < 0 || snake[0].x > snakeboard.width || snake[0].y < 0 || snake[0].y > snakeboard.height) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
 function foodEaten() {
 
   if (snake[0].x == apple[0].x && snake[0].y == apple[0].y) {
@@ -123,7 +163,6 @@ function foodEaten() {
       apple[0].x = Math.floor(Math.random() * snakeboard.width / 10) * 10;
       apple[0].y = Math.floor(Math.random() * snakeboard.height / 10) * 10;
       snake.push({x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
-      console.log(apple);
   }
   
 }
