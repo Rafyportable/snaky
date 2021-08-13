@@ -10,7 +10,9 @@
 
 #gameCanvas {
     display: inline;
-    outline: green .5em solid;
+    border-style: outset;
+    border-width: .5em;
+    border-color: green;
 }
 
 #canvas {
@@ -18,11 +20,34 @@
    text-align:center;
 }
 
-
-
 #score {
     font-family: 'Press Start 2P', cursive;
     text-align: center;
     font-size: 75px;
     margin: 25px
   }
+
+  #startButton {
+      background-color:white;
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-left: 56em;
+      margin-top:.9em;
+      transition-duration: 0.4s;
+      cursor: pointer;
+  }
+
+  #startButton:hover {
+    background-color:green;
+    color:white;
+}
+
+body {
+    background-color:aquamarine;
+}
+

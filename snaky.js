@@ -49,7 +49,12 @@ let score = 0;
 //initiallize the direction
 let direction = "right";
 
-setInterval(main, 120);
+startGame = document.getElementById("startButton");
+
+startGame.addEventListener("click", function() {
+  setInterval(main, 120);
+});
+
 
 function drawSnakePart(snakePart) {  
   snakeboard_ctx.fillStyle = 'green';  
@@ -74,6 +79,7 @@ function main() {
 
 
   if (gameOver()) {
+
     return;
   }
   clearCanvas();
