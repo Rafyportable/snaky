@@ -23,7 +23,6 @@ const board_background = "black";
 const board_border = "black";
 document.addEventListener("keydown", getKeyboardInput)
 
-//TODO: Apple not to appear in the snake
 //TODO: In progress 
 //add score to the game 
 
@@ -33,7 +32,7 @@ let snake = [
   {x: 190, y: 200},
   {x: 180, y: 200},
   {x: 170, y: 200},
-  {x: 160, y: 200},
+  {x: 160, y: 200}
 ];
 
 //position of apple
@@ -45,6 +44,8 @@ let apple = [{
 let dx = 10;
 let dy = 10;
 
+//food score
+let score = 0;
 //initiallize the direction
 let direction = "right";
 
@@ -68,6 +69,7 @@ function drawSnake() {
   snake.forEach(drawSnakePart);
 
 }
+
 function main() {
 
 
@@ -163,6 +165,9 @@ function foodEaten() {
       apple[0].x = Math.floor(Math.random() * snakeboard.width / 10) * 10;
       apple[0].y = Math.floor(Math.random() * snakeboard.height / 10) * 10;
       snake.push({x: snake[snake.length - 1].x, y: snake[snake.length - 1].y});
+
+      score += 10
+      document.getElementById("score").innerHTML = score;
   }
   
 }

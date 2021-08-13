@@ -1,10 +1,28 @@
 #title {
     color: darkgreen;
+    text-align: center;
+    font-size: 140px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: .8em;
 }
 
 #gameCanvas {
+    display: inline;
+    outline: green .5em solid;
 }
 
-body {
-    text-align: center;
+#canvas {
+   width: 100%;
+   text-align:center;
 }
+
+
+
+#score {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 75px;
+    margin: 25px
+  }
